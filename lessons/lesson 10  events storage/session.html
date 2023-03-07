@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+    .wrapper {
+        width: 30px;
+        padding: 10px;
+    }
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    .item {
+        margin-top: 10px;
+        border: red 2px solid;
+    }
+</style>
+
+</head>
+<body>
+<script>
+    const json = localStorage.getItem(`sessions`);
+    const sessions = json ? JSON.parse(json) : [];
+
+    for (const session of sessions) {
+        const wrapper = document.createElement(`div`);
+        const date = document.createElement(`div`);
+        const time = document.createElement(`div`);
+        const device = document.createElement(`div`);
+
+        wrapper.classList.add(`wrapper`, `item`);
+        const dateObj = format(date)
+        date.innerText = `Date: ${dateObj.DD}/${dateObj.MM}/${dateObj.YYYY}`;
+        date.innerText = `Time: ${dateObj.hh}/${dateObj.mn}/${dateObj.ss}`;
+        device.innerText = `device: ${sessions.appCodeName}`
+
+        wrapper.append(date,time,device);
+        document.body.appendChild(wrapper);
+    }
+function format(dataString) {
+        const YYYY = new Date(dateSting).getFullYear().toString();
+        const MM = new Date(dateSting).getMonth().toString();
+        const DD = new Date(dateSting).getDay().toString();
+        const hh = new Date(dateSting).getHours().toString();
+        const mn = new Date(dateSting).getMinutes().toString();
+        const ss = new Date(dateSting).getSeconds().toString();
+
+        return{
+            YYYY: YYYY,
+            MM: MM,
+            DD: DD,
+            hh: hh,
+            mn: mn,
+            ss: ss,
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
